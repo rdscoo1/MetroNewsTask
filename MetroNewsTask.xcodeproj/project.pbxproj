@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,10 @@
 		E8E0E1B42635CDF40078729A /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1B32635CDF40078729A /* NewsViewController.swift */; };
 		E8E0E1B92635CDF50078729A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E0E1B82635CDF50078729A /* Assets.xcassets */; };
 		E8E0E1BC2635CDF50078729A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E0E1BA2635CDF50078729A /* LaunchScreen.storyboard */; };
+		E8E0E1CF2635D2830078729A /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1CE2635D2830078729A /* UIColor+Ext.swift */; };
+		E8E0E1D32635D2C10078729A /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1D22635D2C10078729A /* ConfigurableView.swift */; };
+		E8E0E1DE2635D38C0078729A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1DD2635D38C0078729A /* Constants.swift */; };
+		E8E0E1E22635D3A40078729A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1E12635D3A40078729A /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		E8E0E1B82635CDF50078729A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8E0E1BB2635CDF50078729A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8E0E1BD2635CDF50078729A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8E0E1CE2635D2830078729A /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		E8E0E1D22635D2C10078729A /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		E8E0E1DD2635D38C0078729A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E8E0E1E12635D3A40078729A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +52,6 @@
 				D419A799D4E410CD98BC8B4D /* Pods-MetroNewsTask.debug.xcconfig */,
 				E0062F20D22C361B897A0C41 /* Pods-MetroNewsTask.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -77,13 +84,89 @@
 		E8E0E1AE2635CDF40078729A /* MetroNewsTask */ = {
 			isa = PBXGroup;
 			children = (
+				E8E0E1D72635D33E0078729A /* Modules */,
+				E8E0E1CC2635D26F0078729A /* Supporting Files */,
+			);
+			path = MetroNewsTask;
+			sourceTree = "<group>";
+		};
+		E8E0E1CC2635D26F0078729A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1DC2635D36F0078729A /* Constants */,
 				E8E0E1AF2635CDF40078729A /* AppDelegate.swift */,
-				E8E0E1B32635CDF40078729A /* NewsViewController.swift */,
+				E8E0E1D52635D2D70078729A /* Resources */,
+				E8E0E1CD2635D2770078729A /* Extensions */,
+				E8E0E1D22635D2C10078729A /* ConfigurableView.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E8E0E1CD2635D2770078729A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1CE2635D2830078729A /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E8E0E1D52635D2D70078729A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				E8E0E1B82635CDF50078729A /* Assets.xcassets */,
 				E8E0E1BA2635CDF50078729A /* LaunchScreen.storyboard */,
 				E8E0E1BD2635CDF50078729A /* Info.plist */,
 			);
-			path = MetroNewsTask;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E8E0E1D72635D33E0078729A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1D82635D3460078729A /* News */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E8E0E1D82635D3460078729A /* News */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1DB2635D35C0078729A /* Model */,
+				E8E0E1DA2635D3540078729A /* View */,
+				E8E0E1D92635D34B0078729A /* Controller */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		E8E0E1D92635D34B0078729A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1B32635CDF40078729A /* NewsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E8E0E1DA2635D3540078729A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8E0E1DB2635D35C0078729A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E8E0E1DC2635D36F0078729A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E8E0E1DD2635D38C0078729A /* Constants.swift */,
+				E8E0E1E12635D3A40078729A /* Colors.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +282,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E0E1DE2635D38C0078729A /* Constants.swift in Sources */,
+				E8E0E1E22635D3A40078729A /* Colors.swift in Sources */,
+				E8E0E1CF2635D2830078729A /* UIColor+Ext.swift in Sources */,
+				E8E0E1D32635D2C10078729A /* ConfigurableView.swift in Sources */,
 				E8E0E1B42635CDF40078729A /* NewsViewController.swift in Sources */,
 				E8E0E1B02635CDF40078729A /* AppDelegate.swift in Sources */,
 			);
@@ -342,7 +429,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AC7SNZV8BM;
-				INFOPLIST_FILE = MetroNewsTask/Info.plist;
+				INFOPLIST_FILE = "MetroNewsTask/Supporting Files/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -363,7 +450,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AC7SNZV8BM;
-				INFOPLIST_FILE = MetroNewsTask/Info.plist;
+				INFOPLIST_FILE = "MetroNewsTask/Supporting Files/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
