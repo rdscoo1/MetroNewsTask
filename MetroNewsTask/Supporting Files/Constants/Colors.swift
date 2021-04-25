@@ -1,10 +1,3 @@
-//
-//  Colors.swift
-//  MetroNewsTask
-//
-//  Created by Roman Khodukin on 25.04.2021.
-//
-
 import UIKit
 
 extension Constants {
@@ -46,10 +39,13 @@ extension Constants {
             }
         }
         
+        static let errorIcon = UIColor(hex: "#FF3B30")
+        
+        static let buttonBackground = UIColor(hex: "#FAF0F1")
+        
         static let blue = UIColor(hex: "#1DA1F2")
         
         static let gray = UIColor(hex: "#98999A")
-        
     }
     
 }

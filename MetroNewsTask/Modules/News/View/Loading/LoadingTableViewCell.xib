@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingTableViewCell" id="KGk-i7-Jjw">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fvk-6d-p9h">
+                        <rect key="frame" x="144" y="16" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="5Y3-Pv-hB6"/>
+                            <constraint firstAttribute="height" constant="32" id="fcK-YM-5JU"/>
+                        </constraints>
+                    </activityIndicatorView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-ot-fYs">
+                        <rect key="frame" x="16" y="64" width="288" height="32"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fvk-6d-p9h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="D7h-nV-wu0"/>
+                    <constraint firstItem="yZV-ot-fYs" firstAttribute="top" secondItem="fvk-6d-p9h" secondAttribute="bottom" constant="16" id="MfT-Xv-mdz"/>
+                    <constraint firstAttribute="trailing" secondItem="yZV-ot-fYs" secondAttribute="trailing" constant="16" id="ZUe-pr-43T"/>
+                    <constraint firstItem="yZV-ot-fYs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="jJ5-Za-cJb"/>
+                    <constraint firstAttribute="bottom" secondItem="yZV-ot-fYs" secondAttribute="bottom" constant="16" id="ppM-au-60X"/>
+                    <constraint firstItem="fvk-6d-p9h" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="pv9-ht-p21"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="44.927536231884062" y="61.607142857142854"/>
+        </tableViewCell>
+    </objects>
+</document>
