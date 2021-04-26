@@ -9,10 +9,10 @@ class NewsTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//                guard let errorCell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as? ErrorTableViewCell
-//                else { return UITableViewCell() }
-//
-//                return errorCell
+                guard let errorCell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as? ErrorTableViewCell
+                else { return UITableViewCell() }
+
+                return errorCell
         
 //                let loadingCell = tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell", for: indexPath)
 //
@@ -28,10 +28,10 @@ class NewsTableViewDataSource: NSObject, UITableViewDataSource {
 //
 //        return tweetCell
 //
-        guard let tweetWithoutImageCell = tableView.dequeueReusableCell(withIdentifier: TweetWithoutImageTableViewCell.reuseId, for: indexPath) as? TweetWithoutImageTableViewCell
-        else { return UITableViewCell() }
-
-        return tweetWithoutImageCell
+//        guard let tweetWithoutImageCell = tableView.dequeueReusableCell(withIdentifier: TweetWithoutImageTableViewCell.reuseId, for: indexPath) as? TweetWithoutImageTableViewCell
+//        else { return UITableViewCell() }
+//
+//        return tweetWithoutImageCell
         
         
     }
