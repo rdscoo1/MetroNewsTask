@@ -83,7 +83,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="containerView" destination="6Kd-NL-2el" id="KoI-vE-kEK"/>
-                <outlet property="metroLogoView" destination="Ajg-QE-ckB" id="5xK-lW-6O5"/>
             </connections>
             <point key="canvasLocation" x="33.333333333333336" y="198.21428571428569"/>
         </tableViewCell>

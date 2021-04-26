@@ -1,7 +1,14 @@
 import UIKit
+import SafariServices
 
 class NewsViewController: UIViewController {
-
+    
+    enum Props {
+        case loading
+        case loaded([Tweet])
+        case error(() -> ())
+    }
+    
     // MARK: - UI
     
     private lazy var tableView: UITableView = {
@@ -17,19 +24,30 @@ class NewsViewController: UIViewController {
                            forCellReuseIdentifier: TweetTableViewCell.reuseId)
         tableView.register(UINib(nibName: "TweetWithoutImageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: TweetWithoutImageTableViewCell.reuseId)
-        tableView.allowsSelection = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constants.Colors.appTheme
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
-        tableView.dataSource = tableViewDataSource
-        tableView.delegate = tableViewDelegate
+        tableView.contentInset = UIEdgeInsets(top: 32, left: 0, bottom: 32, right: 0)
+        tableView.dataSource = tableViewDataSourceDelegate
+        tableView.delegate = tableViewDataSourceDelegate
         return tableView
     }()
     
+    // MARK: - Public Properties
+    
+    var props: Props = .loading {
+        didSet {
+            tableViewDataSourceDelegate.updateProp(with: self.props)
+            configureCellSelection(with: self.props)
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: - Private Properties
     
-    private let tableViewDataSource = NewsTableViewDataSource()
-    private let tableViewDelegate = NewsTableViewDelegate()
+    private lazy var tableViewDataSourceDelegate = NewsTableViewDataSourceDelegate(didSelectTweet: { [weak self] number in
+        self?.didSelectTweet(at: number)
+    })
+    private let networkManager = NetworkManager()
 
     // MARK: - Life Cycle
     
@@ -37,6 +55,55 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        loadData()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func configureCellSelection(with props: Props) {
+        switch props {
+        case .loaded(_):
+            tableView.allowsSelection = true
+        case .error(_), .loading:
+            tableView.allowsSelection = false
+        }
+    }
+    
+    private func didSelectTweet(at number: Int) {
+        guard let tweetId = tableViewDataSourceDelegate.getTweetId(cellNumber: number) else {
+            return
+        }
+        
+        let urlString = "https://twitter.com/MetroOperativno/status/\(tweetId)"
+        
+        if let url = URL(string: urlString) {
+            let sfController = SFSafariViewController(url: url)
+            sfController.preferredControlTintColor = Constants.Colors.red
+            sfController.delegate = self
+
+            present(sfController, animated: true)
+        }
+    }
+    
+    private func loadData() {
+        props = .loading
+        networkManager.makeRequest(request: TweetsRequest()) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.props = .error({
+                        self.loadData()
+                    })
+                }
+                print(error.localizedDescription)
+            case .success(let items):
+                DispatchQueue.main.async {
+                    self.props = .loaded(items)
+                }
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -59,3 +126,10 @@ class NewsViewController: UIViewController {
 
 }
 
+// MARK: - SFSafariViewControllerDelegate Conformance
+
+extension NewsViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
+    }
+}

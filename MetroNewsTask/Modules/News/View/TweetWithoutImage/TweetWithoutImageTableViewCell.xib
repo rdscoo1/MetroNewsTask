@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,7 +63,6 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBf-3l-Yrv" customClass="TweetStatistics" customModule="MetroNewsTask" customModuleProvider="target">
                         <rect key="frame" x="24" y="154" width="356" height="28"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="2sJ-ih-UAz"/>
                         </constraints>
@@ -92,6 +90,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="AppTheme"/>
+            <connections>
+                <outlet property="tweetStatistics" destination="pBf-3l-Yrv" id="BoE-U5-IrF"/>
+                <outlet property="tweetTextLabel" destination="tOy-5m-70A" id="szX-Jk-tmQ"/>
+            </connections>
             <point key="canvasLocation" x="198.55072463768118" y="159.04017857142856"/>
         </tableViewCell>
     </objects>
@@ -107,8 +109,5 @@
         <namedColor name="Gray">
             <color red="0.59600001573562622" green="0.60000002384185791" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

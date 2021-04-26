@@ -9,7 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetStatistics" customModule="MetroNewsTask" customModuleProvider="target">
+            <connections>
+                <outlet property="chatCountLabel" destination="i26-cZ-zbW" id="dOx-p6-NpV"/>
+                <outlet property="dateLabel" destination="UaL-ez-uAe" id="ODI-xN-bne"/>
+                <outlet property="favoriteCountLabel" destination="pui-Vj-Xb2" id="dSY-nz-BRn"/>
+                <outlet property="retweetCountLabel" destination="MFC-IC-H4f" id="w5U-Sc-hHu"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
@@ -65,7 +72,6 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="AppTheme"/>
             <constraints>
                 <constraint firstItem="i26-cZ-zbW" firstAttribute="leading" secondItem="qou-Cp-zrU" secondAttribute="trailing" constant="6" id="9fZ-gC-WH3"/>
                 <constraint firstItem="pui-Vj-Xb2" firstAttribute="leading" secondItem="fuh-Yq-mvf" secondAttribute="trailing" constant="6" id="MHS-Xz-CQB"/>
@@ -90,9 +96,6 @@
         <image name="ChatBubbleIcon" width="16" height="16"/>
         <image name="FavoriteIcon" width="16" height="16"/>
         <image name="RetweetIcon" width="16" height="16"/>
-        <namedColor name="AppTheme">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Gray">
             <color red="0.59600001573562622" green="0.60000002384185791" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

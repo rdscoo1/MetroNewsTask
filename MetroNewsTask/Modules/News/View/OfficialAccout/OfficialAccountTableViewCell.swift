@@ -13,8 +13,7 @@ class OfficialAccountTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var metroLogoView: MetroLogoView!
+    @IBOutlet private weak var containerView: UIView!
     
     // MARK: - AwakeFromNib
     

@@ -4,15 +4,18 @@ class TweetWithoutImageTableViewCell: UITableViewCell {
 
     static let reuseId = "TweetWithoutImageTableViewCell"
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    // MARK: - UI
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet private weak var tweetTextLabel: UILabel!
+    @IBOutlet private weak var tweetStatistics: TweetStatistics!
     
+}
+
+// MARK: - ConfigurableView
+
+extension TweetWithoutImageTableViewCell: ConfigurableView {
+    func configure(with model: Tweet) {
+        tweetTextLabel.text = model.text
+        tweetStatistics.configure(with: model)
+    }
 }

@@ -103,6 +103,8 @@
             <color key="backgroundColor" name="AppTheme"/>
             <connections>
                 <outlet property="tweetImageView" destination="HwD-lA-FQX" id="PdB-Ck-bra"/>
+                <outlet property="tweetStatistics" destination="pBf-3l-Yrv" id="LGc-7Q-YOG"/>
+                <outlet property="tweetTextLabel" destination="tOy-5m-70A" id="lAt-Gh-daM"/>
             </connections>
             <point key="canvasLocation" x="198.55072463768118" y="239.73214285714283"/>
         </tableViewCell>
