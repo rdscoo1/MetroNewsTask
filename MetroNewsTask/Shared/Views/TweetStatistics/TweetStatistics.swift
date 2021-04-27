@@ -3,9 +3,8 @@ import SwiftDate
 
 class TweetStatistics: UIView {
     
-    @IBOutlet private weak var favoriteCountLabel: UILabel!
-    @IBOutlet private weak var retweetCountLabel: UILabel!
-    @IBOutlet private weak var chatCountLabel: UILabel!
+    @IBOutlet private weak var retweetLabel: UILabel!
+    @IBOutlet private weak var favoriteLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     
     // MARK: - Init
@@ -24,11 +23,13 @@ class TweetStatistics: UIView {
 
 extension TweetStatistics: ConfigurableView {
     func configure(with model: Tweet) {
-        favoriteCountLabel.text = "\(model.favoriteCount)"
-        retweetCountLabel.text = "\(model.retweetCount)"
-        let regionMS = Region(calendar: Calendars.gregorian, zone: Zones.europeMoscow, locale: Locales.russianRussia)
-
-        dateLabel.text = DateInRegion(milliseconds: model.createdAt, region: regionMS).toString()
+        favoriteLabel.text = "\(model.favoriteCount)"
+        retweetLabel.text = "\(model.retweetCount)"
+        
+        let dateInRegion = DateInRegion(milliseconds: model.createdAt, region: Constants.region)
+        let dateStr = dateInRegion.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.russian)
+        
+        dateLabel.text = dateStr
     }
 }
 

@@ -84,6 +84,14 @@ class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
 
 extension NewsTableViewDataSourceDelegate: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            cell.alpha = 1
+        })
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
