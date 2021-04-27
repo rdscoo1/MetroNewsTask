@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  MetroNewsTask
+
+  Created by Roman Khodukin on 27.04.2021.
+  
+*/
+
+// MARK: - Navigation Title
+
+"News" = "News";
+
+// MARK: - Error
+
+"Error" = "Error";
+"Retry" = "Retry again";
+"Unable_to_connect" = "Unable to connect to server. Please check your internet connection and try again";
+
+// MARK: - Loading
+
+"Loading" = "Loading...";
+
+// MARK: - News
+
+"Moscow metro" = "Moscow metro";
+"Official_account" = "The official Twitter account of the Moscow Metro for prompt information about the work of the metro.";

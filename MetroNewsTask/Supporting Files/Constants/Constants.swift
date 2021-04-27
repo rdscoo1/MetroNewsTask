@@ -6,7 +6,10 @@ struct Constants {
     static let baseUrl = "devapp.mosmetro.ru" // https://devapp.mosmetro.ru/api/tweets/v1.0/
     static let twitterUrl = "https://twitter.com/MetroOperativno/status/" // https://twitter.com/MetroOperativno/status/123456789
     
-    static let region = Region(calendar: Calendars.gregorian, zone: Zones.europeMoscow, locale: Locales.russianRussia)
+    static let languageStr = String(Locale.preferredLanguages[0].prefix(2))
+    
+    static let regionRus = Region(calendar: Calendars.gregorian, zone: Zones.europeMoscow, locale: Locales.russianRussia)
+    static let regionEng = Region(calendar: Calendars.gregorian, zone: Zones.europeMoscow, locale: Locales.english)
     
     static func handleUrls(from string: String) -> NSMutableAttributedString {
         let fullAttributedString = NSMutableAttributedString()

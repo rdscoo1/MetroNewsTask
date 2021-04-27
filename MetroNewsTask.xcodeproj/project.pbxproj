@@ -14,6 +14,10 @@
 		E81B4F32263799E700DE6F17 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B4F31263799E700DE6F17 /* LoadingTableViewCell.swift */; };
 		E86A34322637B94400711AC0 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A34312637B94400711AC0 /* NewsView.swift */; };
 		E86A34362637BCEB00711AC0 /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A34352637BCEB00711AC0 /* Collection+Ext.swift */; };
+		E86A343B2637CB8900711AC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E86A343D2637CB8900711AC0 /* Localizable.strings */; };
+		E86A344A2637CE0000711AC0 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A34492637CE0000711AC0 /* Localizable.swift */; };
+		E86A344D2637CE3400711AC0 /* XibLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A344C2637CE3400711AC0 /* XibLocalizable.swift */; };
+		E86A345A2637D1C600711AC0 /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A34592637D1C600711AC0 /* LocalizationKey.swift */; };
 		E8E0E1B02635CDF40078729A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1AF2635CDF40078729A /* AppDelegate.swift */; };
 		E8E0E1B42635CDF40078729A /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1B32635CDF40078729A /* NewsViewController.swift */; };
 		E8E0E1B92635CDF50078729A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E0E1B82635CDF50078729A /* Assets.xcassets */; };
@@ -57,6 +61,12 @@
 		E81B4F31263799E700DE6F17 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		E86A34312637B94400711AC0 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		E86A34352637BCEB00711AC0 /* Collection+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Ext.swift"; sourceTree = "<group>"; };
+		E86A343C2637CB8900711AC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E86A34422637CC0500711AC0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E86A34432637CC0500711AC0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E86A34492637CE0000711AC0 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		E86A344C2637CE3400711AC0 /* XibLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibLocalizable.swift; sourceTree = "<group>"; };
+		E86A34592637D1C600711AC0 /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
 		E8E0E1AC2635CDF40078729A /* MetroNewsTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetroNewsTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E0E1AF2635CDF40078729A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E0E1B32635CDF40078729A /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +190,8 @@
 				E8E0E2252635F98D0078729A /* CALayer+shadow.swift */,
 				E8E0E230263610E80078729A /* UIView+Xib.swift */,
 				E86A34352637BCEB00711AC0 /* Collection+Ext.swift */,
+				E86A34492637CE0000711AC0 /* Localizable.swift */,
+				E86A344C2637CE3400711AC0 /* XibLocalizable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -190,6 +202,7 @@
 				E8E0E1B82635CDF50078729A /* Assets.xcassets */,
 				E8E0E1BA2635CDF50078729A /* LaunchScreen.storyboard */,
 				E8E0E1BD2635CDF50078729A /* Info.plist */,
+				E86A343D2637CB8900711AC0 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -246,6 +259,7 @@
 				E8E0E1E12635D3A40078729A /* Colors.swift */,
 				E8E0E2042635E3C00078729A /* Images.swift */,
 				E8E0E21E2635F81F0078729A /* Layout.swift */,
+				E86A34592637D1C600711AC0 /* LocalizationKey.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -411,6 +425,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E8E0E1A32635CDF40078729A;
 			productRefGroup = E8E0E1AD2635CDF40078729A /* Products */;
@@ -432,6 +447,7 @@
 				E8E0E1EF2635DFD90078729A /* ErrorTableViewCell.xib in Resources */,
 				E8E0E1E82635DF9A0078729A /* LoadingTableViewCell.xib in Resources */,
 				E81B4F23263783AB00DE6F17 /* MetroLogoView.xib in Resources */,
+				E86A343B2637CB8900711AC0 /* Localizable.strings in Resources */,
 				E8E0E23B26361C5D0078729A /* TweetStatistics.xib in Resources */,
 				E8E0E21C2635F0610078729A /* OfficialAccountHeaderTableView.xib in Resources */,
 				E8E0E1BC2635CDF50078729A /* LaunchScreen.storyboard in Resources */,
@@ -496,6 +512,7 @@
 				E8E0E1F52635E01B0078729A /* TweetTableViewCell.swift in Sources */,
 				E8E0E267263651BF0078729A /* IRequest.swift in Sources */,
 				E8E0E21F2635F81F0078729A /* Layout.swift in Sources */,
+				E86A344A2637CE0000711AC0 /* Localizable.swift in Sources */,
 				E8E0E1E22635D3A40078729A /* Colors.swift in Sources */,
 				E8E0E1CF2635D2830078729A /* UIColor+Ext.swift in Sources */,
 				E8E0E263263651170078729A /* TwitterNews.swift in Sources */,
@@ -503,10 +520,12 @@
 				E8E0E23726361C360078729A /* TweetStatistics.swift in Sources */,
 				E81B4F24263783AB00DE6F17 /* MetroLogoView.swift in Sources */,
 				E8E0E2262635F98D0078729A /* CALayer+shadow.swift in Sources */,
+				E86A345A2637D1C600711AC0 /* LocalizationKey.swift in Sources */,
 				E8E0E1D32635D2C10078729A /* ConfigurableView.swift in Sources */,
 				E81B4F32263799E700DE6F17 /* LoadingTableViewCell.swift in Sources */,
 				E8E0E26026364F640078729A /* TwitterParser.swift in Sources */,
 				E8E0E1B42635CDF40078729A /* NewsViewController.swift in Sources */,
+				E86A344D2637CE3400711AC0 /* XibLocalizable.swift in Sources */,
 				E86A34362637BCEB00711AC0 /* Collection+Ext.swift in Sources */,
 				E8E0E26E2636521E0078729A /* TweetsRequest.swift in Sources */,
 				E8E0E1B02635CDF40078729A /* AppDelegate.swift in Sources */,
@@ -522,10 +541,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E86A343D2637CB8900711AC0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E86A343C2637CB8900711AC0 /* en */,
+				E86A34432637CC0500711AC0 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		E8E0E1BA2635CDF50078729A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E8E0E1BB2635CDF50078729A /* Base */,
+				E86A34422637CC0500711AC0 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -537,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -598,6 +628,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

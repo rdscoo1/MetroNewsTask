@@ -26,8 +26,14 @@ extension TweetStatistics: ConfigurableView {
         favoriteLabel.text = "\(model.favoriteCount)"
         retweetLabel.text = "\(model.retweetCount)"
         
-        let dateInRegion = DateInRegion(milliseconds: model.createdAt, region: Constants.region)
-        let dateStr = dateInRegion.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.russian)
+        let dateInRegion = DateInRegion(milliseconds: model.createdAt, region: Constants.regionRus)
+        var dateStr: String = ""
+        
+        if Constants.languageStr == "ru" {
+            dateStr = dateInRegion.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.russian)
+        } else {
+            dateStr = dateInRegion.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.english)
+        }
         
         dateLabel.text = dateStr
     }

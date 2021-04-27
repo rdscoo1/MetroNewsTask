@@ -5,7 +5,6 @@ class NewsTableViewDataSourceDelegate: NSObject {
     // MARK: - Public Properties
     
     var props: NewsView.Props = .loading
-    var tweets: [Tweet] = []
     
     // MARK: - Public Methods
     

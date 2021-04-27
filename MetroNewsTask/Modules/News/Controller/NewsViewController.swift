@@ -17,6 +17,7 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = Constants.LocalizationKey.news.string
         loadData()
     }
     
