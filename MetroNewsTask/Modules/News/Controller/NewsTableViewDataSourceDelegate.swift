@@ -4,7 +4,7 @@ class NewsTableViewDataSourceDelegate: NSObject {
     
     // MARK: - Public Properties
     
-    var props: NewsView.Props = .loading
+    var props: NewsViewController.Props = .loading
     
     // MARK: - Public Methods
     
@@ -16,7 +16,7 @@ class NewsTableViewDataSourceDelegate: NSObject {
         return nil
     }
     
-    func updateProp(with props: NewsView.Props) {
+    func updateProp(with props: NewsViewController.Props) {
         self.props = props
     }
     

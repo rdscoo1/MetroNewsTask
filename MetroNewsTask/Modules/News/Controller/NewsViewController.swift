@@ -3,25 +3,83 @@ import SafariServices
 
 class NewsViewController: UIViewController {
     
-    // MARK: - Private Properties
-
-    private let networkManager = NetworkManager()
-
-    // MARK: - Life Cycle
-    
-    override func loadView() {
-        view = NewsView(frame: UIScreen.main.bounds)
-        view.backgroundColor = Constants.Colors.appTheme
+    enum Props {
+        case loading
+        case loaded([Loaded])
+        case error(Error)
+        
+        struct Loaded {
+            let id: Int
+            let text: String
+            let createdAt: Int
+            let retweetCount: Int
+            let favoriteCount: Int
+            let mediaEntities: [String]
+            let onSelect: (Int) -> ()
+        }
+        
+        struct Error {
+            let action: () -> ()
+        }
     }
+    
+    // MARK: - UI
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UINib(nibName: "ErrorTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: ErrorTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: "LoadingTableViewCell")
+        tableView.register(UINib(nibName: "TweetTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: TweetTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "TweetWithoutImageTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: TweetWithoutImageTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "OfficialAccountHeaderTableView", bundle: nil),
+                           forHeaderFooterViewReuseIdentifier: OfficialAccountHeaderTableView.reuseId)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = Constants.Colors.appTheme
+        tableView.dataSource = tableViewDataSourceDelegate
+        tableView.delegate = tableViewDataSourceDelegate
+        return tableView
+    }()
+    
+    // MARK: - Private Properties
+    
+    private let tableViewDataSourceDelegate = NewsTableViewDataSourceDelegate()
+    private let networkManager = NetworkManager()
+    
+    // MARK: - Public Properties
+    
+    var props: Props = .loading {
+        didSet {
+            tableViewDataSourceDelegate.updateProp(with: self.props)
+            configureCellSelection(with: self.props)
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = Constants.LocalizationKey.news.string
+        setupView()
         loadData()
     }
     
     // MARK: - Private Methods
+    
+    private func configureCellSelection(with props: Props) {
+        switch props {
+        case .loaded(_):
+            tableView.allowsSelection = true
+        case .error(_), .loading:
+            tableView.allowsSelection = false
+        }
+    }
     
     private func didSelectTweet(at id: Int) {
         let urlString = Constants.twitterUrl + String(id)
@@ -30,26 +88,26 @@ class NewsViewController: UIViewController {
             let sfController = SFSafariViewController(url: url)
             sfController.preferredControlTintColor = Constants.Colors.red
             sfController.delegate = self
-
+            
             present(sfController, animated: true)
         }
     }
     
     private func loadData() {
-        updateView(with: .loading)
+        props = .loading
         networkManager.makeRequest(request: TweetsRequest()) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.updateView(with: .error(NewsView.Props.Error(action: { self.loadData() })))
+                    self.props = .error(Props.Error(action: { self.loadData() }))
                 }
                 print(error.localizedDescription)
             case .success(let data):
                 DispatchQueue.main.async {
                     let propsData = data.map { tweet in
-                        return NewsView.Props.Loaded(
+                        return Props.Loaded(
                             id: tweet.id,
                             text: tweet.text,
                             createdAt: tweet.createdAt,
@@ -60,20 +118,28 @@ class NewsViewController: UIViewController {
                                 self.didSelectTweet(at: id)
                             })
                     }
-                    self.updateView(with: .loaded(propsData))
+                    self.props = .loaded(propsData)
                 }
             }
         }
     }
-
-    // MARK: - Public Methods
     
-    func updateView(with props: NewsView.Props) {
-        if let customView = view as? NewsView {
-            customView.props = props
-        }
+    private func setupView() {
+        view.backgroundColor = Constants.Colors.appTheme
+        setupLayout()
     }
-
+    
+    private func setupLayout() {
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+    }
+    
 }
 
 // MARK: - SFSafariViewControllerDelegate Conformance
