@@ -14,7 +14,7 @@ class TweetWithoutImageTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension TweetWithoutImageTableViewCell: ConfigurableView {
-    func configure(with model: Tweet) {
+    func configure(with model: NewsView.Props.Loaded) {
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)
         tweetStatistics.configure(with: model)

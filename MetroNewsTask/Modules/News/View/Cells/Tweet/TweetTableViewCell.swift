@@ -27,7 +27,7 @@ class TweetTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension TweetTableViewCell: ConfigurableView {
-    func configure(with model: Tweet) {
+    func configure(with model: NewsView.Props.Loaded) {
         
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)

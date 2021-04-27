@@ -1,18 +1,11 @@
 import UIKit
 
-class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
+class NewsTableViewDataSourceDelegate: NSObject {
     
     // MARK: - Public Properties
     
-    var props: NewsViewController.Props = .loading
+    var props: NewsView.Props = .loading
     var tweets: [Tweet] = []
-    var didSelectTweet: (Int) -> Void
-    
-    // MARK: - Init
-    
-    init(didSelectTweet: @escaping (Int) -> Void) {
-        self.didSelectTweet = didSelectTweet
-    }
     
     // MARK: - Public Methods
     
@@ -24,12 +17,16 @@ class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
         return nil
     }
     
-    func updateProp(with props: NewsViewController.Props) {
+    func updateProp(with props: NewsView.Props) {
         self.props = props
     }
     
-    // MARK: - DataSource Methods
-    
+}
+
+// MARK: - UITableViewDataSource
+
+extension NewsTableViewDataSourceDelegate: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if case .loaded(let data) = props {
             return data.count
@@ -44,7 +41,9 @@ class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if case .loaded(let data) = props {
-            let tweet = data[indexPath.row]
+            guard let tweet = data[safe: indexPath.row] else {
+                return UITableViewCell()
+            }
             
             if !tweet.mediaEntities.isEmpty {
                 guard let tweetCell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.reuseId, for: indexPath) as? TweetTableViewCell
@@ -97,8 +96,8 @@ extension NewsTableViewDataSourceDelegate: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if case .loaded = props {
-            didSelectTweet(indexPath.row)
+        if case .loaded(let tweets) = props, let tweet = tweets[safe: indexPath.row]  {
+            tweet.onSelect(tweet.id)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

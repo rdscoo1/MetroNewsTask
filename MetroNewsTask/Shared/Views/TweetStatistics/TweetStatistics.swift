@@ -22,7 +22,7 @@ class TweetStatistics: UIView {
 }
 
 extension TweetStatistics: ConfigurableView {
-    func configure(with model: Tweet) {
+    func configure(with model: NewsView.Props.Loaded) {
         favoriteLabel.text = "\(model.favoriteCount)"
         retweetLabel.text = "\(model.retweetCount)"
         

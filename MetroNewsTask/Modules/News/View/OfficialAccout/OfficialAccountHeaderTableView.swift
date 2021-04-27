@@ -1,10 +1,3 @@
-//
-//  OfficialAccountHeaderTableView.swift
-//  MetroNewsTask
-//
-//  Created by Roman Khodukin on 27.04.2021.
-//
-
 import UIKit
 
 class OfficialAccountHeaderTableView: UITableViewHeaderFooterView {
