@@ -6,27 +6,30 @@ class NewsViewController: UIViewController {
     enum Props {
         case loading
         case loaded([Tweet])
-        case error(() -> ())
+        case error(Error)
+        
+        struct Error {
+            let action: () -> ()
+        }
     }
     
     // MARK: - UI
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UINib(nibName: "ErrorTableViewCell", bundle: nil),
                            forCellReuseIdentifier: ErrorTableViewCell.reuseId)
         tableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "LoadingTableViewCell")
-        tableView.register(UINib(nibName: "OfficialAccountTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: OfficialAccountTableViewCell.reuseId)
         tableView.register(UINib(nibName: "TweetTableViewCell", bundle: nil),
                            forCellReuseIdentifier: TweetTableViewCell.reuseId)
         tableView.register(UINib(nibName: "TweetWithoutImageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: TweetWithoutImageTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "OfficialAccountHeaderTableView", bundle: nil),
+                           forHeaderFooterViewReuseIdentifier: OfficialAccountHeaderTableView.reuseId)
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constants.Colors.appTheme
-        tableView.contentInset = UIEdgeInsets(top: 32, left: 0, bottom: 32, right: 0)
         tableView.dataSource = tableViewDataSourceDelegate
         tableView.delegate = tableViewDataSourceDelegate
         return tableView
@@ -74,7 +77,7 @@ class NewsViewController: UIViewController {
             return
         }
         
-        let urlString = "https://twitter.com/MetroOperativno/status/\(tweetId)"
+        let urlString = Constants.twitterUrl + String(tweetId)
         
         if let url = URL(string: urlString) {
             let sfController = SFSafariViewController(url: url)
@@ -93,9 +96,7 @@ class NewsViewController: UIViewController {
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.props = .error({
-                        self.loadData()
-                    })
+                    self.props = .error(Props.Error(action: { self.loadData() }))
                 }
                 print(error.localizedDescription)
             case .success(let items):

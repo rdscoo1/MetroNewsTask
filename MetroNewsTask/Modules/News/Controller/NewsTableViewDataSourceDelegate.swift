@@ -38,7 +38,7 @@ class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
         } else if case .error = props {
             return 1
         }
-                
+        
         return 0
     }
     
@@ -63,29 +63,27 @@ class NewsTableViewDataSourceDelegate: NSObject, UITableViewDataSource {
             }
         } else if case .loading = props {
             let loadingCell = tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell", for: indexPath)
-
+                        
             return loadingCell
-        } else if case .error = props {
+        } else if case .error(let errorData) = props {
             guard let errorCell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as? ErrorTableViewCell
             else { return UITableViewCell() }
-
+            
+            errorCell.didTapTryAgain = {                
+                errorData.action()
+            }
+            
             return errorCell
         }
         
         return UITableViewCell()
-        
-//        guard let officialAccountCell = tableView.dequeueReusableCell(withIdentifier: OfficialAccountTableViewCell.reuseId, for: indexPath) as? OfficialAccountTableViewCell
-//        else { return UITableViewCell() }
-//
-//        return officialAccountCell
-        
     }
 }
 
 // MARK: - UITableViewDelegate
 
 extension NewsTableViewDataSourceDelegate: UITableViewDelegate {
-        
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -95,5 +93,26 @@ extension NewsTableViewDataSourceDelegate: UITableViewDelegate {
             didSelectTweet(indexPath.row)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if case .loaded = props {
+            guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: OfficialAccountHeaderTableView.reuseId)  as? OfficialAccountHeaderTableView else {
+                return nil
+            }
+            view.setupUI()
+            
+            return view
+        }
+        
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if case .loaded = props {
+            return 144
+        }
+        
+        return 0
     }
 }

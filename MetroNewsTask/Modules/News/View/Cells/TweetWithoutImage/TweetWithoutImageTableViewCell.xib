@@ -6,17 +6,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetTableViewCell" rowHeight="434" id="KGk-i7-Jjw" customClass="TweetTableViewCell" customModule="MetroNewsTask" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="404" height="434"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetWithoutImageTableViewCell" rowHeight="193" id="KGk-i7-Jjw" customClass="TweetWithoutImageTableViewCell" customModule="MetroNewsTask">
+            <rect key="frame" x="0.0" y="0.0" width="404" height="193"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="MetroLogoView">
-                <rect key="frame" x="0.0" y="0.0" width="404" height="434"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="404" height="193"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-0x-bAG" customClass="MetroLogoView" customModule="MetroNewsTask" customModuleProvider="target">
@@ -55,41 +54,31 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOy-5m-70A">
-                        <rect key="frame" x="24" y="68" width="356" height="149"/>
+                        <rect key="frame" x="24" y="68" width="356" height="62"/>
                         <string key="text">С 12 сентября на Замоскворецкой линии поезда будут проезжать станцию «Каширская» без остановки при следовании из центра. 
 Подробнее о том, как доехать до «Каширской» из центра: mosmetro.ru/kash</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterImage" translatesAutoresizingMaskIntoConstraints="NO" id="HwD-lA-FQX">
-                        <rect key="frame" x="24" y="233" width="356" height="150"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="150" id="9Sa-rI-ddL"/>
-                        </constraints>
-                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBf-3l-Yrv" customClass="TweetStatistics" customModule="MetroNewsTask" customModuleProvider="target">
-                        <rect key="frame" x="24" y="395" width="356" height="28"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <rect key="frame" x="24" y="154" width="356" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="2sJ-ih-UAz"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="trailing" secondItem="HwD-lA-FQX" secondAttribute="trailing" id="4fx-du-tZv"/>
                     <constraint firstAttribute="trailing" secondItem="tOy-5m-70A" secondAttribute="trailing" constant="24" id="7Gk-Rh-aZ9"/>
+                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="top" secondItem="tOy-5m-70A" secondAttribute="bottom" constant="24" id="CIC-26-6Lh"/>
                     <constraint firstItem="tOy-5m-70A" firstAttribute="leading" secondItem="pcL-0x-bAG" secondAttribute="leading" id="DVg-eF-JM7"/>
                     <constraint firstAttribute="trailing" secondItem="zJf-OF-1IG" secondAttribute="trailing" constant="16" id="ENW-I0-Nve"/>
-                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="top" secondItem="HwD-lA-FQX" secondAttribute="bottom" constant="12" id="GZZ-yk-ohO"/>
-                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="leading" secondItem="HwD-lA-FQX" secondAttribute="leading" id="IWo-3m-ZDf"/>
                     <constraint firstItem="0tz-aV-cQD" firstAttribute="leading" secondItem="JwH-CR-0z7" secondAttribute="leading" id="IhC-lg-HYK"/>
-                    <constraint firstItem="HwD-lA-FQX" firstAttribute="top" secondItem="tOy-5m-70A" secondAttribute="bottom" constant="16" id="NcA-ef-S6S"/>
-                    <constraint firstItem="HwD-lA-FQX" firstAttribute="leading" secondItem="tOy-5m-70A" secondAttribute="leading" id="b0n-EV-SHk"/>
                     <constraint firstItem="TV9-PC-AMh" firstAttribute="centerY" secondItem="JwH-CR-0z7" secondAttribute="centerY" id="ban-XK-bjk"/>
+                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="trailing" secondItem="tOy-5m-70A" secondAttribute="trailing" id="cC7-aW-8WZ"/>
                     <constraint firstItem="JwH-CR-0z7" firstAttribute="leading" secondItem="pcL-0x-bAG" secondAttribute="trailing" constant="8" id="eAF-Al-njz"/>
-                    <constraint firstItem="HwD-lA-FQX" firstAttribute="trailing" secondItem="tOy-5m-70A" secondAttribute="trailing" id="glf-H7-VzA"/>
                     <constraint firstItem="0tz-aV-cQD" firstAttribute="top" secondItem="JwH-CR-0z7" secondAttribute="bottom" constant="4" id="h8T-fG-feq"/>
+                    <constraint firstItem="pBf-3l-Yrv" firstAttribute="leading" secondItem="tOy-5m-70A" secondAttribute="leading" id="jKm-wY-KTi"/>
                     <constraint firstItem="zJf-OF-1IG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="kCC-Bk-6pD"/>
                     <constraint firstItem="JwH-CR-0z7" firstAttribute="top" secondItem="pcL-0x-bAG" secondAttribute="top" id="qFa-vN-CMP"/>
                     <constraint firstItem="tOy-5m-70A" firstAttribute="top" secondItem="pcL-0x-bAG" secondAttribute="bottom" constant="16" id="qgD-qW-vhP"/>
@@ -102,15 +91,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="AppTheme"/>
             <connections>
-                <outlet property="tweetImageView" destination="HwD-lA-FQX" id="PdB-Ck-bra"/>
-                <outlet property="tweetStatistics" destination="pBf-3l-Yrv" id="LGc-7Q-YOG"/>
-                <outlet property="tweetTextLabel" destination="tOy-5m-70A" id="lAt-Gh-daM"/>
+                <outlet property="tweetStatistics" destination="pBf-3l-Yrv" id="BoE-U5-IrF"/>
+                <outlet property="tweetTextLabel" destination="tOy-5m-70A" id="szX-Jk-tmQ"/>
             </connections>
-            <point key="canvasLocation" x="198.55072463768118" y="239.73214285714283"/>
+            <point key="canvasLocation" x="198.55072463768118" y="159.04017857142856"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="TwitterImage" width="323" height="489"/>
         <image name="TwitterLogo" width="23" height="18"/>
         <image name="TwitterVerifiedBadge" width="15" height="16"/>
         <namedColor name="AppTheme">
@@ -122,8 +109,5 @@
         <namedColor name="Gray">
             <color red="0.59600001573562622" green="0.60000002384185791" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
