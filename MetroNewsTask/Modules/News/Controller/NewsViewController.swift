@@ -23,14 +23,12 @@ class NewsViewController: UIViewController {
             var id: Int
             var text: String
             var imageUrl: String
-            let onSelect: (Int) -> ()
             var statistics: TweetStatistics.ViewState
         }
         
         struct TweetLoadedWithoutImage: _TweetWithoutImageTableViewCell {
             var id: Int
             var text: String
-            let onSelect: (Int) -> ()
             var statistics: TweetStatistics.ViewState
         }
         
@@ -129,9 +127,6 @@ class NewsViewController: UIViewController {
                         id: datum.id,
                         text: datum.text,
                         imageUrl: datum.mediaEntities[0],
-                        onSelect: { id in
-                            self.didSelectTweet(at: id)
-                        },
                         statistics: .init(favoriteCount: datum.favoriteCount,
                                           retweetCount: datum.retweetCount,
                                           createdAt: datum.createdAt))
@@ -141,9 +136,6 @@ class NewsViewController: UIViewController {
                     let tweetWithoutImageCell = ViewState.TweetLoadedWithoutImage(
                         id: datum.id,
                         text: datum.text,
-                        onSelect: { id in
-                            self.didSelectTweet(at: id)
-                        },
                         statistics: .init(favoriteCount: datum.favoriteCount,
                                           retweetCount: datum.retweetCount,
                                           createdAt: datum.createdAt))
