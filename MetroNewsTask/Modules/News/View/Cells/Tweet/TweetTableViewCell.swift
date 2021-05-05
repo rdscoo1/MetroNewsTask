@@ -5,6 +5,7 @@ protocol _TweetTableViewCell {
     var id: Int { get set }
     var text: String { get set }
     var imageUrl: String { get set }
+    var statistics: TweetStatistics.ViewState { get set }
 }
 
 class TweetTableViewCell: UITableViewCell {
@@ -37,6 +38,6 @@ extension TweetTableViewCell: ConfigurableView {
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)
         tweetImageView.sd_setImage(with: URL(string: model.imageUrl))
-//        tweetStatistics.configure(with: model.statistics)
+        tweetStatistics.configure(with: model.statistics)
     }
 }

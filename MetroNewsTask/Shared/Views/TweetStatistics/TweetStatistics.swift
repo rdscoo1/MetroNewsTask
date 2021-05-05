@@ -9,6 +9,12 @@ protocol _TweetStatistics {
 
 class TweetStatistics: UIView {
     
+    struct ViewState: _TweetStatistics {
+        var favoriteCount: Int
+        var retweetCount: Int
+        var createdAt: Int
+    }
+    
     @IBOutlet private weak var retweetLabel: UILabel!
     @IBOutlet private weak var favoriteLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!

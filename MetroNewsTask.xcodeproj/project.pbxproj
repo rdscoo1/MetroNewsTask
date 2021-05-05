@@ -32,7 +32,6 @@
 		E8E0E1F52635E01B0078729A /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1F32635E01B0078729A /* TweetTableViewCell.swift */; };
 		E8E0E1F62635E01B0078729A /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E0E1F42635E01B0078729A /* TweetTableViewCell.xib */; };
 		E8E0E1FC2635E0370078729A /* TweetWithoutImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E1FA2635E0370078729A /* TweetWithoutImageTableViewCell.swift */; };
-		E8E0E2012635E1100078729A /* NewsTableViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E2002635E1100078729A /* NewsTableViewDataSourceDelegate.swift */; };
 		E8E0E2052635E3C00078729A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E2042635E3C00078729A /* Images.swift */; };
 		E8E0E20A2635E5190078729A /* MetroButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E2092635E5190078729A /* MetroButton.swift */; };
 		E8E0E21F2635F81F0078729A /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E21E2635F81F0078729A /* Layout.swift */; };
@@ -82,7 +81,6 @@
 		E8E0E1F32635E01B0078729A /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		E8E0E1F42635E01B0078729A /* TweetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
 		E8E0E1FA2635E0370078729A /* TweetWithoutImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetWithoutImageTableViewCell.swift; sourceTree = "<group>"; };
-		E8E0E2002635E1100078729A /* NewsTableViewDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewDataSourceDelegate.swift; sourceTree = "<group>"; };
 		E8E0E2042635E3C00078729A /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		E8E0E2092635E5190078729A /* MetroButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroButton.swift; sourceTree = "<group>"; };
 		E8E0E21E2635F81F0078729A /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				E8E0E1B32635CDF40078729A /* NewsViewController.swift */,
-				E8E0E2002635E1100078729A /* NewsTableViewDataSourceDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -513,7 +510,6 @@
 				E8E0E1E22635D3A40078729A /* Colors.swift in Sources */,
 				E8E0E1CF2635D2830078729A /* UIColor+Ext.swift in Sources */,
 				E8E0E263263651170078729A /* TwitterNews.swift in Sources */,
-				E8E0E2012635E1100078729A /* NewsTableViewDataSourceDelegate.swift in Sources */,
 				E8E0E23726361C360078729A /* TweetStatistics.swift in Sources */,
 				E81B4F24263783AB00DE6F17 /* MetroLogoView.swift in Sources */,
 				E8E0E2262635F98D0078729A /* CALayer+shadow.swift in Sources */,

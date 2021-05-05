@@ -3,6 +3,7 @@ import UIKit
 protocol _TweetWithoutImageTableViewCell {
     var id: Int { get set }
     var text: String { get set }
+    var statistics: TweetStatistics.ViewState { get set }
 }
 
 class TweetWithoutImageTableViewCell: UITableViewCell {
@@ -22,6 +23,6 @@ extension TweetWithoutImageTableViewCell: ConfigurableView {
     func configure(with model: _TweetWithoutImageTableViewCell) {
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)
-//        tweetStatistics.configure(with: model.statistics)
+        tweetStatistics.configure(with: model.statistics)
     }
 }
