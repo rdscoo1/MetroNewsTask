@@ -1,6 +1,12 @@
 import UIKit
 import SwiftDate
 
+protocol _TweetStatistics {
+    var favoriteCount: Int { get set }
+    var retweetCount: Int { get set }
+    var createdAt: Int { get set }
+}
+
 class TweetStatistics: UIView {
     
     @IBOutlet private weak var retweetLabel: UILabel!
@@ -22,7 +28,7 @@ class TweetStatistics: UIView {
 }
 
 extension TweetStatistics: ConfigurableView {
-    func configure(with model: NewsViewController.Props.Loaded) {
+    func configure(with model: _TweetStatistics) {
         favoriteLabel.text = "\(model.favoriteCount)"
         retweetLabel.text = "\(model.retweetCount)"
         

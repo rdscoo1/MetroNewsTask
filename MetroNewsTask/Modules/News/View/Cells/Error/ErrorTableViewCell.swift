@@ -1,5 +1,9 @@
 import UIKit
 
+protocol _ErrorTableViewCell {
+    var didTapTryAgain: (() -> Void)? { get set }
+}
+
 class ErrorTableViewCell: UITableViewCell {
 
     static let reuseId = "ErrorTableViewCell"
@@ -13,11 +17,17 @@ class ErrorTableViewCell: UITableViewCell {
     
     // MARK: - Public Properties
     
-    var didTapTryAgain: (() -> Void)?
+    private var didTapTryAgain: (() -> Void)?
     
     // MARK: - IBAction
     
     @IBAction func didTapTryAgainButton(_ sender: Any) {
         didTapTryAgain?()
+    }
+}
+
+extension ErrorTableViewCell: ConfigurableView {
+    func configure(with model: _ErrorTableViewCell) {
+        didTapTryAgain = model.didTapTryAgain
     }
 }

@@ -1,5 +1,10 @@
 import UIKit
 
+protocol _TweetWithoutImageTableViewCell {
+    var id: Int { get set }
+    var text: String { get set }
+}
+
 class TweetWithoutImageTableViewCell: UITableViewCell {
 
     static let reuseId = "TweetWithoutImageTableViewCell"
@@ -14,9 +19,9 @@ class TweetWithoutImageTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension TweetWithoutImageTableViewCell: ConfigurableView {
-    func configure(with model: NewsViewController.Props.Loaded) {
+    func configure(with model: _TweetWithoutImageTableViewCell) {
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)
-        tweetStatistics.configure(with: model)
+//        tweetStatistics.configure(with: model.statistics)
     }
 }

@@ -1,6 +1,12 @@
 import UIKit
 import SDWebImage
 
+protocol _TweetTableViewCell {
+    var id: Int { get set }
+    var text: String { get set }
+    var imageUrl: String { get set }
+}
+
 class TweetTableViewCell: UITableViewCell {
     
     static let reuseId = "TweetTableViewCell"
@@ -27,11 +33,10 @@ class TweetTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension TweetTableViewCell: ConfigurableView {
-    func configure(with model: NewsViewController.Props.Loaded) {
-        
+    func configure(with model: _TweetTableViewCell) {
         tweetTextLabel.isUserInteractionEnabled = true
         tweetTextLabel.attributedText = Constants.handleUrls(from: model.text)
-        tweetImageView.sd_setImage(with: URL(string: model.mediaEntities[0]))
-        tweetStatistics.configure(with: model)
+        tweetImageView.sd_setImage(with: URL(string: model.imageUrl))
+//        tweetStatistics.configure(with: model.statistics)
     }
 }

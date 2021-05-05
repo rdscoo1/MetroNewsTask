@@ -3,24 +3,40 @@ import SafariServices
 
 class NewsViewController: UIViewController {
     
-    enum Props {
+    enum StateMode {
         case loading
-        case loaded([Loaded])
-        case error(Error)
+        case loaded
+        case error
+    }
+    
+    struct ViewState {
         
-        struct Loaded {
-            let id: Int
-            let text: String
-            let createdAt: Int
-            let retweetCount: Int
-            let favoriteCount: Int
-            let mediaEntities: [String]
+        var rows: [Any]
+        
+        struct Loading: _LoadingTableViewCell {
+            var text: String?
+        }
+        
+        struct OfficialAccountCell { }
+        
+        struct TweetLoaded: _TweetTableViewCell {
+            var id: Int
+            var text: String
+            var imageUrl: String
             let onSelect: (Int) -> ()
         }
         
-        struct Error {
-            let action: () -> ()
+        struct TweetLoadedWithoutImage: _TweetWithoutImageTableViewCell {
+            var id: Int
+            var text: String
+            let onSelect: (Int) -> ()
         }
+        
+        struct Error: _ErrorTableViewCell {
+            var didTapTryAgain: (() -> Void)?
+        }
+        
+        static let loading = ViewState(rows: [Loading()])
     }
     
     // MARK: - UI
@@ -40,22 +56,22 @@ class NewsViewController: UIViewController {
                            forHeaderFooterViewReuseIdentifier: OfficialAccountHeaderTableView.reuseId)
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constants.Colors.appTheme
-        tableView.dataSource = tableViewDataSourceDelegate
-        tableView.delegate = tableViewDataSourceDelegate
+        tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
     
     // MARK: - Private Properties
     
-    private let tableViewDataSourceDelegate = NewsTableViewDataSourceDelegate()
+    //    private let tableViewDataSourceDelegate = NewsTableViewDataSourceDelegate()
     private let networkManager = NetworkManager()
     
     // MARK: - Public Properties
     
-    var props: Props = .loading {
+    public var viewState: ViewState = .loading {
         didSet {
-            tableViewDataSourceDelegate.updateProp(with: self.props)
-            configureCellSelection(with: self.props)
+            //            tableViewDataSourceDelegate.updateProp(with: self.initial)
+            //            configureCellSelection(with: self.props)
             tableView.reloadData()
         }
     }
@@ -72,11 +88,11 @@ class NewsViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func configureCellSelection(with props: Props) {
-        switch props {
-        case .loaded(_):
+    private func configureCellSelection(with state: StateMode) {
+        switch state {
+        case .loaded:
             tableView.allowsSelection = true
-        case .error(_), .loading:
+        case .error, .loading:
             tableView.allowsSelection = false
         }
     }
@@ -93,32 +109,61 @@ class NewsViewController: UIViewController {
         }
     }
     
+    private func makeState(with mode: StateMode, data: Any?) {
+        switch mode {
+        case .loading:
+            let loadingCell = ViewState.Loading()
+            viewState.rows = [loadingCell]
+        case .loaded:
+            guard let data = data as? [Tweet] else {
+                return
+            }
+            viewState.rows = []
+            
+            let officialCell = ViewState.OfficialAccountCell()
+            viewState.rows.append(officialCell)
+            
+            for datum in data {
+                if !datum.mediaEntities.isEmpty {
+                    let tweetCell = ViewState.TweetLoaded(id: datum.id,
+                                                          text: datum.text,
+                                                          imageUrl: datum.mediaEntities[0],
+                                                          onSelect: { id in
+                                                            self.didSelectTweet(at: id)
+                                                          })
+                    viewState.rows.append(tweetCell)
+                } else {
+                    let tweetWithoutImageCell = ViewState.TweetLoadedWithoutImage(
+                        id: datum.id,
+                        text: datum.text,
+                        onSelect: { id in
+                            self.didSelectTweet(at: id)
+                        })
+                    viewState.rows.append(tweetWithoutImageCell)
+                }
+            }
+        case .error:
+            let errorCell = ViewState.Error(didTapTryAgain: {
+                self.loadData()
+            })
+            viewState.rows = [errorCell]
+        }
+    }
+    
     private func loadData() {
-        props = .loading
+        makeState(with: .loading, data: nil)
         networkManager.makeRequest(request: TweetsRequest()) { [weak self] result in
             guard let self = self else { return }
-
+            
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.props = .error(Props.Error(action: { self.loadData() }))
+                    self.makeState(with: .error, data: nil)
                 }
                 print(error.localizedDescription)
             case .success(let data):
                 DispatchQueue.main.async {
-                    let propsData = data.map { tweet in
-                        return Props.Loaded(
-                            id: tweet.id,
-                            text: tweet.text,
-                            createdAt: tweet.createdAt,
-                            retweetCount: tweet.retweetCount,
-                            favoriteCount: tweet.favoriteCount,
-                            mediaEntities: tweet.mediaEntities,
-                            onSelect: { id in
-                                self.didSelectTweet(at: id)
-                            })
-                    }
-                    self.props = .loaded(propsData)
+                    self.makeState(with: .loaded, data: data)
                 }
             }
         }
@@ -141,6 +186,122 @@ class NewsViewController: UIViewController {
     }
     
 }
+
+
+// MARK: - UITableViewDataSource
+
+extension NewsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewState.rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch viewState.rows[indexPath.row] {
+        case is ViewState.Loading:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell", for: indexPath)
+            return cell
+        case is ViewState.Error:
+            let data = viewState.rows[indexPath.row] as! ViewState.Error
+            let cell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as! ErrorTableViewCell
+            cell.configure(with: data)
+            return cell
+        case is ViewState.TweetLoaded:
+            let data = self.viewState.rows[indexPath.row] as! ViewState.TweetLoaded
+            let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.reuseId, for: indexPath) as! TweetTableViewCell
+            cell.configure(with: data)
+            return cell
+        case is ViewState.TweetLoadedWithoutImage:
+            let data = self.viewState.rows[indexPath.row] as! ViewState.TweetLoadedWithoutImage
+            let cell = tableView.dequeueReusableCell(withIdentifier: TweetWithoutImageTableViewCell.reuseId, for: indexPath) as! TweetWithoutImageTableViewCell
+            cell.configure(with: data)
+            return cell
+        default:
+            print("default")
+            return UITableViewCell()
+        }
+    }
+    
+    //        switch props {
+    //        case .loaded(let data):
+    //            guard let tweet = data[safe: indexPath.row] else {
+    //                return UITableViewCell()
+    //            }
+    //            if !tweet.mediaEntities.isEmpty {
+    //                guard let tweetCell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.reuseId, for: indexPath) as? TweetTableViewCell
+    //                else { return UITableViewCell() }
+    //
+    //                tweetCell.configure(with: tweet)
+    //
+    //                return tweetCell
+    //            } else {
+    //                guard let tweetWithoutImageCell = tableView.dequeueReusableCell(withIdentifier: TweetWithoutImageTableViewCell.reuseId, for: indexPath) as? TweetWithoutImageTableViewCell
+    //                else { return UITableViewCell() }
+    //
+    //                tweetWithoutImageCell.configure(with: tweet)
+    //
+    //                return tweetWithoutImageCell
+    //            }
+    //        case .error(let errorData):
+    //            guard let errorCell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as? ErrorTableViewCell
+    //            else { return UITableViewCell() }
+    //
+    //            errorCell.didTapTryAgain = {
+    //                errorData.action()
+    //            }
+    //
+    //            return errorCell
+    //        case .loading:
+    //            let loadingCell = tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell", for: indexPath)
+    //
+    //            return loadingCell
+}
+
+// MARK: - UITableViewDelegate
+
+extension NewsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            cell.alpha = 1
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        if case .loaded(let tweets) = props, let tweet = tweets[safe: indexPath.row]  {
+    //            tweet.onSelect(tweet.id)
+    //        }
+    //        tableView.deselectRow(at: indexPath, animated: true)
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        if case .loaded = props {
+    //            guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: OfficialAccountHeaderTableView.reuseId)  as? OfficialAccountHeaderTableView else {
+    //                return nil
+    //            }
+    //            view.setupUI()
+    //
+    //            return view
+    //        }
+    //
+    //        return nil
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //        if case .loaded = props {
+    //            return 144
+    //        }
+    //
+    //        return 0
+    //    }
+}
+
 
 // MARK: - SFSafariViewControllerDelegate Conformance
 
