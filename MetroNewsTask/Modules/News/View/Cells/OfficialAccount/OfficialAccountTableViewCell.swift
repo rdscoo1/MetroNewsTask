@@ -1,29 +1,31 @@
+//
+//  OfficialAccountTableViewCell.swift
+//  MetroNewsTask
+//
+//  Created by Roman Khodukin on 25.04.2021.
+//
+
 import UIKit
 
-class OfficialAccountHeaderTableView: UITableViewHeaderFooterView {
-
-    static let reuseId = "OfficialAccountHeaderTableView"
+class OfficialAccountTableViewCell: UITableViewCell {
     
-    // MARK: - UI
+    static let reuseId = "OfficialAccountTableViewCell"
+    
+    // MARK: - IBOutlets
     
     @IBOutlet private weak var containerView: UIView!
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        
-        self.backgroundView = UIView()
-        self.backgroundView!.backgroundColor = UIColor.clear
-    }
+    // MARK: - AwakeFromNib
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.backgroundView = UIView()
-        self.backgroundView!.backgroundColor = UIColor.clear
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setupUI()
     }
     
     // MARK: - Private Methods
     
-    func setupUI() {
+    private func setupUI() {
         containerView.layer.cornerRadius = Constants.Layout.cornerRadius
         
         setShadow()
@@ -45,7 +47,7 @@ class OfficialAccountHeaderTableView: UITableViewHeaderFooterView {
 
 // MARK: - traitCollectionDidChange
 
-extension OfficialAccountHeaderTableView {
+extension OfficialAccountTableViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 

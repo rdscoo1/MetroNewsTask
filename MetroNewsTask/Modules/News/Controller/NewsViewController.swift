@@ -52,8 +52,8 @@ class NewsViewController: UIViewController {
                            forCellReuseIdentifier: TweetTableViewCell.reuseId)
         tableView.register(UINib(nibName: "TweetWithoutImageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: TweetWithoutImageTableViewCell.reuseId)
-        tableView.register(UINib(nibName: "OfficialAccountHeaderTableView", bundle: nil),
-                           forHeaderFooterViewReuseIdentifier: OfficialAccountHeaderTableView.reuseId)
+        tableView.register(UINib(nibName: "OfficialAccountTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: OfficialAccountTableViewCell.reuseId)
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constants.Colors.appTheme
         tableView.dataSource = self
@@ -205,6 +205,9 @@ extension NewsViewController: UITableViewDataSource {
             let data = viewState.rows[indexPath.row] as! ViewState.Error
             let cell = tableView.dequeueReusableCell(withIdentifier: ErrorTableViewCell.reuseId, for: indexPath) as! ErrorTableViewCell
             cell.configure(with: data)
+            return cell
+        case is ViewState.OfficialAccountCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: OfficialAccountTableViewCell.reuseId, for: indexPath) as! OfficialAccountTableViewCell
             return cell
         case is ViewState.TweetLoaded:
             let data = self.viewState.rows[indexPath.row] as! ViewState.TweetLoaded
